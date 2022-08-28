@@ -8,6 +8,8 @@ $(document).ready(function () {
         registerForm.validate({
             submitHandler:function (form){
                 $(this).attr("disabled");
+                // $(".error").text("هذا الحقل مطلوب.")
+
                 $.ajax({
                     url: api_url + "/company/register",
                     dataType: "json",
@@ -34,11 +36,12 @@ $(document).ready(function () {
                                 icon:'success'
                             }).then((result)=>{
                                 if (result.isConfirmed){
-                                    console.log("isConfirmed")
+                                    console.log("isConfirmed");
+                                    window.location.href = "/form/create";
                                     //new form
                                 }else if(result.isDenied){
                                     //print data
-                                   window.location.href = "/form/" + data.form_id+"/print"
+                                   window.location.href = "/form/" + data.form_id+"/print";
 
                                 }
                             });

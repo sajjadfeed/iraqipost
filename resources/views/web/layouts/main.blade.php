@@ -8,7 +8,7 @@
     <link rel="icon" href="assets/img/basic/favicon.ico" type="image/x-icon">
     <title>البريد العراقي Iraqi Post</title>
     <!-- CSS -->
-    <link rel="stylesheet" href="{{asset("assets/css/app.css")}}">
+    <link rel="stylesheet" href="{{asset("/assets/css/app.css")}}">
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Cairo:wght@200;300;400;500;600;700;800;900&display=swap');
     </style>
