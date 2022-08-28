@@ -2,10 +2,132 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Address;
+use App\CompaniesProperty;
+use App\CompaniesRegistrationInfo;
+use App\Company;
 use App\Http\Controllers\Controller;
+use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Str;
 
 class RegisterCompany extends Controller
 {
     //
+
+
+    public function store(Request $request){
+
+
+        //Default validation
+        $defaultValidation = $this->defaultValidation($request->all());
+        if ($defaultValidation->fails()){
+            return response()->json(["status"=>false,"message"=>$defaultValidation->errors()]);
+        }
+
+        if ($request->formType ==1 || $request->formType ==2){
+            $companyRegistrationValidation = $this->companyRegistrationValidation($request->all());
+            if ($companyRegistrationValidation->fails()){
+                return response()->json(["status"=>false,"message"=>$companyRegistrationValidation->errors()]);
+            }
+        }
+
+
+
+
+        //create user
+        $user = new User();
+        $user->name = $request->input("company_name");
+        $user->email = $request->input("email");
+        $user->role_id = 3;
+        $user->password = Hash::make("11223344");
+        $user->phone_number = $request->input("phone_number");
+        $user->save();
+
+//        //save address
+        $address = new Address();
+        $address->city_id = $request->input("city_id");
+        $address->alqada = $request->input("alqada");
+        $address->alziqaq = $request->input("alziqaq");
+        $address->almahala = $request->input("almahala");
+        $address->user_id = $user->id;
+        $address->save();
+
+
+        //save company Registration Info
+
+        $regInfo = new CompaniesRegistrationInfo();
+        $regInfo->registration_number = $request->input("registration_number");
+        $regInfo->registration_address = $request->input("registration_address");
+        $regInfo->registration_date = Str::replace("/","-",$request->input("registration_date"));
+        $regInfo->registration_type = $request->input("registration_type");
+        $regInfo->user_id = $user->id;
+        $regInfo->save();
+
+        $property = new CompaniesProperty();
+        $property->cars_count = $request->input("cars_count");
+        $property->motorcycle_count = $request->input("motorcycle_count");
+        $property->employee_count = $request->input("employee_count");
+        $property->user_id = $user->id;
+        $property->save();
+
+
+        $company = new Company();
+        $company->user_id = $user->id;
+        $company->trade_name = $request->input("trade_name");
+        $company->legal_form = $request->input("legal_form");
+        $company->budget = $request->input("company_budget");
+        $company->website_url = $request->input("website_url");
+        $company->address_id = $address->id;
+        $company->legal_registration_id = $regInfo->id;
+        $company->photo = $request->input("photo");
+        $company->partner_type_id = $request->input("partnet_type");
+        $company->passport_number = $request->input("passport_number");
+        $company->property_id = $property->id;
+        $company->ceo_name = $request->input("ceo_name");
+        $company->national_id_number = $request->input("national_id_number");
+        $company->save();
+
+        return response()->json(["status"=>true,"message"=>"Form created","form_id"=>$company->id]);
+
+    }
+
+
+    public function defaultValidation($request){
+        $validator = Validator::make($request,[
+            "formType"=>["required","max:2"],
+            "company_name"=>["required","max:255"],
+            "email"=>["required","unique:users","max:100"],
+            "phone_number"=>["required","unique:users","max:11"],
+            "city_id"=>["required","max:2"],
+            "alqada"=>["required","max:255"],
+            "almahala"=>["required","max:255"],
+            "alziqaq"=>["required","max:255"],
+            "passport_number"=>["required","max:255"],
+            "national_id_number"=>["required","max:255"],
+        ]);
+
+        return $validator;
+
+
+
+
+    }
+
+    public function companyRegistrationValidation($request){
+        $validator = Validator::make($request,[
+            "registration_number"=>["required","max:255"],
+            "registration_address"=>["required","max:255"],
+            "registration_date"=>["required","max:100","date_format:Y-m-d"],
+            "registration_type"=>["required"],
+
+        ]);
+
+        return $validator;
+
+
+
+    }
 }

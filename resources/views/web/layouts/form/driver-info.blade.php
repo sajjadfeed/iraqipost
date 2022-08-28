@@ -1,24 +1,24 @@
-<div class="border border-1 p-5 rounded d-none" id="details-section-4">
+<div class="border border-1 p-5 rounded d-none" id="details-section-5">
     <div class="form-row">
         <div class="col">
-            <label for="company_name">اسم التطبيق</label>
+            <label for="company_name">اسم السائق</label>
             <input id="company_name" type="text" class="form-control"
-                   placeholder="اسم الصفحة الالكترونية">
+                   placeholder="اسم السائق">
         </div>
 
         <div class="col">
-            <label for="company_name">رقم تعريف التطبيق على الاندرويد</label>
+            <label for="company_name">رقم المراجعة</label>
             <input id="company_name" type="text" class="form-control"
-                   placeholder="رقم تعريف التطبيق على الاندرويد">
+                   placeholder="رقم المراجعة">
         </div>
     </div>
 
     <div class="form-row">
 
         <div class="col">
-            <label for="trade_name">رقم تعريف التطبيق على الIOS</label>
-            <input type="email" id="trade_name" class="form-control"
-                   placeholder="رابط الصفحة">
+            <label for="trade_name">اجازة السوق</label>
+            <input type="file" id="trade_name" class="form-control"
+                   placeholder="اجازة السوق">
         </div>
 
         <div class="col">
@@ -27,31 +27,6 @@
                    placeholder="البريد الالكتروني">
         </div>
 
-    </div>
-
-    <div class="form-row">
-
-        <div class="col">
-            <label for="trade_name">الموقع الالكتروني</label>
-            <input type="email" id="trade_name" class="form-control"
-                   placeholder="الموقع الالكتروني">
-        </div>
-
-        <div class="col">
-            <label for="trade_name">رابط التطبيق على الاندرويد</label>
-            <input type="email" id="trade_name" class="form-control"
-                   placeholder="رابط التطبيق على الاندرويد">
-        </div>
-
-    </div>
-
-
-    <div class="form-row">
-        <div class="col">
-            <label for="trade_name">رابط التطبيق على IOS</label>
-            <input type="email" id="trade_name" class="form-control"
-                   placeholder="رابط التطبيق على IOS">
-        </div>
     </div>
 
 
