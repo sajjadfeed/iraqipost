@@ -58,36 +58,62 @@ class RegisterCompany extends Controller
 
         //save company Registration Info
 
-        $regInfo = new CompaniesRegistrationInfo();
-        $regInfo->registration_number = $request->input("registration_number");
-        $regInfo->registration_address = $request->input("registration_address");
-        $regInfo->registration_date = Str::replace("/","-",$request->input("registration_date"));
-        $regInfo->registration_type = $request->input("registration_type");
-        $regInfo->user_id = $user->id;
-        $regInfo->save();
+        if ($request->formType ==1 || $request->formType ==2){
+            $regInfo = new CompaniesRegistrationInfo();
+            $regInfo->registration_number = $request->input("registration_number");
+            $regInfo->registration_address = $request->input("registration_address");
+            $regInfo->registration_date = Str::replace("/","-",$request->input("registration_date"));
+            $regInfo->registration_type = $request->input("registration_type");
+            $regInfo->user_id = $user->id;
+            $regInfo->save();
+        }
 
-        $property = new CompaniesProperty();
-        $property->cars_count = $request->input("cars_count");
-        $property->motorcycle_count = $request->input("motorcycle_count");
-        $property->employee_count = $request->input("employee_count");
-        $property->user_id = $user->id;
-        $property->save();
+
+        if ($request->formType !=5){
+            $property = new CompaniesProperty();
+            $property->cars_count = $request->input("cars_count");
+            $property->motorcycle_count = $request->input("motorcycle_count");
+            $property->employee_count = $request->input("employee_count");
+            $property->user_id = $user->id;
+            $property->save();
+        }
+
+
+
+
 
 
         $company = new Company();
         $company->user_id = $user->id;
         $company->trade_name = $request->input("trade_name");
+        $company->formType = $request->input("formType");
         $company->legal_form = $request->input("legal_form");
         $company->budget = $request->input("company_budget");
         $company->website_url = $request->input("website_url");
         $company->address_id = $address->id;
-        $company->legal_registration_id = $regInfo->id;
+        $company->legal_registration_id = (isset($regInfo)? $regInfo->id: null);
         $company->photo = $request->input("photo");
         $company->partner_type_id = $request->input("partnet_type");
         $company->passport_number = $request->input("passport_number");
-        $company->property_id = $property->id;
+        $company->property_id = (isset($property) ?$property->id: null);
         $company->ceo_name = $request->input("ceo_name");
         $company->national_id_number = $request->input("national_id_number");
+
+        //page fields
+        $company->id_number = $request->input("id_number");
+        $company->page_url = $request->input("page_url");
+
+
+        //app fields
+        $company->android_app_id = $request->input("android_app_id");
+        $company->android_app_url = $request->input("android_app_url");
+        $company->ios_app_id = $request->input("ios_app_id");
+        $company->ios_app_url = $request->input("ios_app_url");
+
+
+
+        //driver fields
+        $company->revision_number = $request->input("revision_number");
         $company->save();
 
         return response()->json(["status"=>true,"message"=>"Form created","form_id"=>$company->id]);

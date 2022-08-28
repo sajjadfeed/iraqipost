@@ -9,6 +9,8 @@
     font-size: 20px;
 }
 
+
+
 .custom-control-label::after, .custom-control-label::before {
     top: 0 !important;
     width: 1.3rem;

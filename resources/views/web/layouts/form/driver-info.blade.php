@@ -2,13 +2,13 @@
     <div class="form-row">
         <div class="col">
             <label for="company_name">اسم السائق</label>
-            <input id="company_name" type="text" class="form-control"
+            <input id="company_name" name="company_name" type="text" class="form-control"
                    placeholder="اسم السائق">
         </div>
 
         <div class="col">
-            <label for="company_name">رقم المراجعة</label>
-            <input id="company_name" type="text" class="form-control"
+            <label for="revision_number">رقم المراجعة</label>
+            <input id="revision_number" name="revision_number" type="number" class="form-control"
                    placeholder="رقم المراجعة">
         </div>
     </div>
@@ -16,14 +16,14 @@
     <div class="form-row">
 
         <div class="col">
-            <label for="trade_name">اجازة السوق</label>
-            <input type="file" id="trade_name" class="form-control"
+            <label for="driver_license">اجازة السوق</label>
+            <input type="file" name="driver_license" id="driver_license" class="form-control"
                    placeholder="اجازة السوق">
         </div>
 
         <div class="col">
-            <label for="trade_name">البريد الالكتروني</label>
-            <input type="email" id="trade_name" class="form-control"
+            <label for="email">البريد الالكتروني</label>
+            <input type="email" name="email" id="email" class="form-control"
                    placeholder="البريد الالكتروني">
         </div>
 
