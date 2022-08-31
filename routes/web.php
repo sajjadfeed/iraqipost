@@ -37,7 +37,7 @@ Route::get("/camera",function (){
 });
 
 Route::get("/qrcode",function (){
-    return QrCode::size(300)->generate('test body');
+    return QrCode::size(300)->generate('2222');
 });
 
 Route::group(['prefix' => 'admin'], function () {

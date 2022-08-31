@@ -12,28 +12,18 @@ $(document).ready(function () {
 
 
     let formTypeTitle = $(".formTypeTitle");
-    let details_section_1 = $("#details-section-1"); //company section
-    let details_section_3 = $("#details-section-3"); // page section
-    let details_section_4 = $("#details-section-4"); // App section
-    let details_section_5 = $("#details-section-5"); // driver section
+
     let partner_type = $("#partner_type"); // partner_type section
 
-
+    let mainInfo = $("#mainInfo");
     let companyBuget = $("#companyـbudget");
     let registerationInfo = $("#company_registeration_info");
     let companyPropertySection = $("#company_property_section");
     let ceoNameCol = $("#ceo_name_col");
     let formVideo = document.querySelector("video");
-
-    details_section_1.removeClass("d-none");
     registerationInfo.removeClass("d-none");
 
-    function hideAllDetailsSection() {
-        details_section_1.addClass("d-none");
-        details_section_3.addClass("d-none");
-        details_section_4.addClass("d-none");
-        details_section_5.addClass("d-none");
-    }
+
 
     const constraints = {
         video: {
@@ -76,28 +66,27 @@ $(document).ready(function () {
         // console.log(image_data_url);
     })
 
-
+    mainInfo.load("/layouts/company-info.html");
     $("input[name='formType']").on("change", function (event) {
 
         let formTypeIndex = $(event.currentTarget).val();
         formTypeTitle.text(titleFormTypes[formTypeIndex - 1]);
 
         switch (formTypeIndex) {
-            case "1": //Company Form
 
-                hideAllDetailsSection();
-                details_section_1.removeClass("d-none");
-                registerationInfo.removeClass("d-none");
-                companyBuget.show();
-                partner_type.show();
-                ceoNameCol.show();
-                companyPropertySection.show();
+            case "1": //Company Form
+                mainInfo.load("/layouts/company-info.html",function (){
+                    companyBuget.show();
+                    partner_type.show();
+                    ceoNameCol.show();
+                    companyPropertySection.show();
+                });
+
 
                 break;
 
             case "2": //office
-                hideAllDetailsSection();
-                details_section_1.removeClass("d-none");
+                mainInfo.load("/layouts/office-info.html");
                 registerationInfo.removeClass("d-none");
                 $("#companyـbudget").hide();
                 partner_type.show();
@@ -109,8 +98,7 @@ $(document).ready(function () {
 
             case "3": //Page Form
 
-                hideAllDetailsSection();
-                details_section_3.removeClass("d-none").show();
+                mainInfo.load("/layouts/page-info.html");
                 registerationInfo.addClass("d-none");
                 partner_type.hide();
                 ceoNameCol.show();
@@ -118,8 +106,7 @@ $(document).ready(function () {
                 break;
 
             case "4": // App Form
-                hideAllDetailsSection();
-                details_section_4.removeClass("d-none").show();
+                mainInfo.load("/layouts/app-info.html");
                 registerationInfo.addClass("d-none");
                 partner_type.hide();
                 ceoNameCol.show();
@@ -127,13 +114,15 @@ $(document).ready(function () {
                 break;
 
             case "5": //Driver Form
-                hideAllDetailsSection();
-                details_section_5.removeClass("d-none").show();
+                mainInfo.load("/layouts/driver-info.html");
                 registerationInfo.addClass("d-none");
                 partner_type.hide();
                 ceoNameCol.hide();
                 companyPropertySection.hide();
                 break
+
+            default:
+                console.log(formTypeIndex);
         }
 
     })

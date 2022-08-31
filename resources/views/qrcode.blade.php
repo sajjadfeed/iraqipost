@@ -1,1 +1,1 @@
-{!! QrCode::size(300)->generate('test body') !!}
+{!! QrCode::size(300)->generate('2') !!}

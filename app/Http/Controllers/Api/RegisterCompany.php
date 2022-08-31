@@ -20,7 +20,6 @@ class RegisterCompany extends Controller
 
     public function store(Request $request){
 
-
         //Default validation
         $defaultValidation = $this->defaultValidation($request->all());
         if ($defaultValidation->fails()){
@@ -33,6 +32,7 @@ class RegisterCompany extends Controller
                 return response()->json(["status"=>false,"message"=>$companyRegistrationValidation->errors()]);
             }
         }
+//
 
 
 
@@ -40,7 +40,7 @@ class RegisterCompany extends Controller
         //create user
         $user = new User();
         $user->name = $request->input("company_name");
-        $user->email = $request->input("email");
+        $user->email = $request->email;
         $user->role_id = 3;
         $user->password = Hash::make("11223344");
         $user->phone_number = $request->input("phone_number");
@@ -133,6 +133,7 @@ class RegisterCompany extends Controller
             "alziqaq"=>["required","max:255"],
             "passport_number"=>["required","max:255"],
             "national_id_number"=>["required","max:255"],
+            "photo"=>["required"],
         ]);
 
         return $validator;
