@@ -21,8 +21,12 @@
 
     <div class="row">
         <div class="col">
-            <h5>رقم الاستمارة: 5</h5>
-            <h5>التاريخ: 2022/08/27</h5>
+            <h5>رقم الاستمارة:
+                {{$company->id}}
+            </h5>
+            <h5>التاريخ:
+                {{\Carbon\Carbon::parse($company->created_at)->format("Y/m/d")}}
+            </h5>
         </div>
 
         <div class="col">
@@ -31,7 +35,7 @@
 
         <div class="col">
             <img src="{{asset("assets/img/iraqipost_logo.png")}}" width="100"/>
-            <img src="https://cdn.pixabay.com/photo/2014/07/09/10/04/man-388104_960_720.jpg" width="100"/>
+            <img src="{{$company->photo}}" width="100"/>
         </div>
     </div>
 
@@ -64,7 +68,7 @@
 
         <tr>
             <th>اسم الشركة:</th>
-            <td class="border-0">هذا اسم الشركة</td>
+            <td class="border-0">{{$company->user->name}}</td>
 
             <td class="border-0"></td>
             <td class="border-0"></td>
@@ -73,31 +77,31 @@
 
         <tr>
             <th>المحافظة:</th>
-            <td>بغداد</td>
+            <td>{{$company->address->city->name}}</td>
 
             <th>القضاء:</th>
-            <td class="border-0">المنصور</td>
+            <td class="border-0">{{$company->address->alqada}}</td>
         </tr>
 
         <tr>
             <th>المحلة:</th>
-            <td>بغداد</td>
+            <td>{{$company->address->almahala}}</td>
 
             <th>الزقاق:</th>
-            <td class="border-0">المنصور</td>
+            <td class="border-0">{{$company->address->alziqaq}}</td>
         </tr>
 
         <tr>
             <th>رقم الهاتف</th>
-            <td>0780213232</td>
+            <td>{{$company->user->phone_number}}</td>
 
             <th>البريد الالكتروني</th>
-            <td class="border-0">info@test.com</td>
+            <td class="border-0">{{$company->user->email}}</td>
 
         </tr>
         <tr>
             <th>اسم المدير المفوض</th>
-            <td class="border-0">سجاد اسعد</td>
+            <td class="border-0">{{$company->ceo_name}}</td>
             <td class="border-0"></td>
             <td class="border-0"></td>
         </tr>
@@ -106,55 +110,61 @@
             <th>الرقم التعريفي</th>
             <td>98293892</td>
             <th>الموقع الالكتروني</th>
-            <td class="border-0">www.company.com</td>
+            <td class="border-0">{{$company->user->email}}</td>
         </tr>
 
         <tr>
             <th>الاسم التجاري</th>
-            <td>98293892</td>
+            <td>{{$company->trade_name}}</td>
             <th>الشكل القانوني</th>
-            <td class="border-0">www.company.com</td>
+            <td class="border-0">{{$company->legal_form}}</td>
         </tr>
-
+        @if($company->formType ==1 || $company->formType==2)
         <tr>
             <th>رقم التسجيل</th>
-            <td>98293892</td>
+            <td>{{$company->legal_reg->registration_number}}</td>
             <th>عنوان التسجيل</th>
-            <td class="border-0">www.company.com</td>
+            <td class="border-0">{{$company->legal_reg->registration_address}}</td>
         </tr>
 
         <tr>
             <th>تاريخ التسجيل</th>
-            <td>98293892</td>
+            <td>{{$company->legal_reg->registration_date}}</td>
             <th>نوع التسجيل</th>
-            <td class="border-0">www.company.com</td>
+            <td class="border-0">{{$company->legal_reg->registration_type}}</td>
         </tr>
 
-        <tr>
-            <th>رأس مال الشركة</th>
-            <td class="border-0">98293892</td>
+            @if($company->formType !=2)
+            <tr>
+                <th>رأس مال الشركة</th>
+                <td class="border-0">{{$company->budget}}</td>
 
-            <td class="border-0"></td>
-            <td class="border-0"></td>
-        </tr>
+                <td class="border-0"></td>
+                <td class="border-0"></td>
+            </tr>
+            @endif
 
+        @endif
+
+        @if($company->formType !=5)
         <tr>
             <th>عدد العجلات المسجلة</th>
-            <td>2</td>
+            <td>{{$company->property->cars_count}}</td>
 
             <th>عدد الدراجات المسجلة</th>
-            <td class="border-0">2</td>
+            <td class="border-0">{{$company->property->motorcycle_count}}</td>
 
         </tr>
 
         <tr>
             <th>عدد الموظفين</th>
-            <td class="border-0">2</td>
+            <td class="border-0">{{$company->property->employee_count}}</td>
             <td class="border-0"></td>
             <td class="border-0"></td>
             <td class="border-0"></td>
         </tr>
 
+        @endif
 
         <tr>
             <th>aksjdkadjs</th>
@@ -167,7 +177,7 @@
         crossorigin="anonymous"></script>
 
 <script>
-    window.print();
+    // window.print();
 </script>
 </body>
 </html>

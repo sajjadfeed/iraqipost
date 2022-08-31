@@ -3,7 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Company;
-use Illuminate\Http\Request;
+use App\Models\User;
+
 
 class PrintFormController extends Controller
 {
@@ -12,6 +13,10 @@ class PrintFormController extends Controller
     public function print($id){
 
        $company = Company::find($id);
-        return view("web.company.print");
+
+        return view("web.company.print",["company"=>$company]);
     }
+
+
+
 }
