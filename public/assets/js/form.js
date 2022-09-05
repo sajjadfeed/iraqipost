@@ -1,4 +1,31 @@
 
+(function($) {
+    $.fn.inputFilter = function(callback, errMsg) {
+        return this.on("input keydown keyup mousedown mouseup select contextmenu drop focusout", function(e) {
+            if (callback(this.value)) {
+                // Accepted value
+                if (["keydown","mousedown","focusout"].indexOf(e.type) >= 0){
+                    $(this).removeClass("input-error");
+                    this.setCustomValidity("");
+                }
+                this.oldValue = this.value;
+                this.oldSelectionStart = this.selectionStart;
+                this.oldSelectionEnd = this.selectionEnd;
+            } else if (this.hasOwnProperty("oldValue")) {
+                // Rejected value - restore the previous one
+                $(this).addClass("input-error");
+                this.setCustomValidity(errMsg);
+                this.reportValidity();
+                this.value = this.oldValue;
+                this.setSelectionRange(this.oldSelectionStart, this.oldSelectionEnd);
+            } else {
+                // Rejected value - nothing to restore
+                this.value = "";
+            }
+        });
+    };
+}(jQuery));
+
 
 $(document).ready(function () {
 
@@ -22,6 +49,8 @@ $(document).ready(function () {
     let ceoNameCol = $("#ceo_name_col");
     let formVideo = document.querySelector("video");
     registerationInfo.removeClass("d-none");
+
+
 
 
 
@@ -66,7 +95,12 @@ $(document).ready(function () {
         // console.log(image_data_url);
     })
 
-    mainInfo.load("/layouts/company-info.html");
+    mainInfo.load("/layouts/company-info.html",function (){
+        $(".type-integer").inputFilter(function(value) {
+            return /^-?\d*$/.test(value); }, "يجب ادخل رقم");
+
+
+    });
     $("input[name='formType']").on("change", function (event) {
 
         let formTypeIndex = $(event.currentTarget).val();
@@ -80,13 +114,21 @@ $(document).ready(function () {
                     partner_type.show();
                     ceoNameCol.show();
                     companyPropertySection.show();
+
+                    $(".type-integer").inputFilter(function(value) {
+                        return /^-?\d*$/.test(value); }, "يجب ادخل رقم");
+
                 });
 
 
                 break;
 
             case "2": //office
-                mainInfo.load("/layouts/office-info.html");
+                mainInfo.load("/layouts/office-info.html",function () {
+                    $(".type-integer").inputFilter(function(value) {
+                        return /^-?\d*$/.test(value); }, "يجب ادخل رقم");
+
+                });
                 registerationInfo.removeClass("d-none");
                 $("#companyـbudget").hide();
                 partner_type.show();
@@ -98,7 +140,11 @@ $(document).ready(function () {
 
             case "3": //Page Form
 
-                mainInfo.load("/layouts/page-info.html");
+                mainInfo.load("/layouts/page-info.html",function () {
+                    $(".type-integer").inputFilter(function(value) {
+                        return /^-?\d*$/.test(value); }, "يجب ادخل رقم");
+
+                });
                 registerationInfo.addClass("d-none");
                 partner_type.hide();
                 ceoNameCol.show();
@@ -106,7 +152,11 @@ $(document).ready(function () {
                 break;
 
             case "4": // App Form
-                mainInfo.load("/layouts/app-info.html");
+                mainInfo.load("/layouts/app-info.html",function () {
+                    $(".type-integer").inputFilter(function(value) {
+                        return /^-?\d*$/.test(value); }, "يجب ادخل رقم");
+
+                });
                 registerationInfo.addClass("d-none");
                 partner_type.hide();
                 ceoNameCol.show();
@@ -114,7 +164,11 @@ $(document).ready(function () {
                 break;
 
             case "5": //Driver Form
-                mainInfo.load("/layouts/driver-info.html");
+                mainInfo.load("/layouts/driver-info.html",function () {
+                    $(".type-integer").inputFilter(function(value) {
+                        return /^-?\d*$/.test(value); }, "يجب ادخل رقم");
+
+                });
                 registerationInfo.addClass("d-none");
                 partner_type.hide();
                 ceoNameCol.hide();
@@ -125,7 +179,8 @@ $(document).ready(function () {
                 console.log(formTypeIndex);
         }
 
-    })
-})
+    });
 
+
+});
 

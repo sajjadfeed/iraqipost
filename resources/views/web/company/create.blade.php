@@ -12,9 +12,6 @@
     <script type="text/javascript" src="{{asset("assets/js/form.js")}}"></script>
     <script type="text/javascript" src="{{asset("assets/js/ajax.js")}}"></script>
 
-    <script>
-
-    </script>
 @endsection
 @section("container")
 
@@ -24,7 +21,7 @@
     </div>
     <div class="container-fluid" style="background-color: #ffffff;">
 
-        <form method="post" enctype="multipart/form-data" id="registerForm">
+        <form method="post" enctype="multipart/form-data" id="registerForm" class="needs-validation">
 
             <!-- Form type-->
             <div class="row p-3">
@@ -126,16 +123,25 @@
                                         <div class="col">
                                             <label for="almahala_input">المحلة</label>
                                             <input required id="almahala_input" name="almahala" type="text"
-                                                   class="form-control"
+                                                   class="form-control type-integer"
                                                    placeholder="المحلة">
                                         </div>
                                         <div class="col">
                                             <label for="alziqaq_input">الزقاق</label>
                                             <input required type="text" id="alziqaq_input" name="alziqaq"
-                                                   class="form-control"
+                                                   class="form-control type-integer"
                                                    placeholder="الزقاق">
                                         </div>
 
+                                    </div>
+
+                                    <div class="form-row">
+                                        <div class="col">
+                                            <label for="near_input">اقرب نقطة دالة</label>
+                                            <input required type="text" id="near_input" name="near"
+                                                   class="form-control"
+                                                   placeholder="اقرب نقطة دالة">
+                                        </div>
                                     </div>
 
                                 </div>
@@ -148,9 +154,9 @@
                                     <div class="form-row">
 
                                         <div class="col">
-                                            <label for="registration_number_input">رقم التسجيل</label>
-                                            <input required type="number" name="registration_number"
-                                                   id="registration_number_input" class="form-control"
+                                            <label for="registration_number_input">رقم التسجيل لدى غرفة التجارة</label>
+                                            <input required type="text" name="registration_number"
+                                                   id="registration_number_input" class="form-control type-integer"
                                                    placeholder="رقم التسجيل">
                                         </div>
                                         <div class="col">
@@ -248,7 +254,7 @@
                                         <div class="col">
                                             <label for="national_id_number_input">رقم البطاقة الوطنية</label>
                                             <input required id="national_id_number_input" name="national_id_number"
-                                                   type="number" class="form-control"
+                                                   type="text" class="form-control type-integer"
                                                    placeholder="رقم البطاقة الوطنية">
                                         </div>
                                     </div>
@@ -261,9 +267,10 @@
                                                    placeholder="رقم جواز السفر">
                                         </div>
                                         <div class="col">
+
                                             <label for="phone_number_input">رقم الهاتف</label>
-                                            <input required type="number" name="phone_number" id="phone_number_input"
-                                                   class="form-control"
+                                            <input required type="text" minlength="11" maxlength="11" name="phone_number" id="phone_number_input"
+                                                   class="form-control type-integer"
                                                    placeholder="رقم الهاتف">
                                         </div>
                                     </div>
@@ -278,14 +285,14 @@
 
                                             <div class="col">
                                                 <label for="cars_count_input">عدد العجلات</label>
-                                                <input required type="number" name="cars_count" id="cars_count_input"
-                                                       class="form-control"
-                                                       placeholder="عدد العجلات">
+                                                <input required type="text" name="cars_count" id="cars_count_input"
+                                                       class="form-control type-integer"
+                                                       placeholder="عدد العجلات" >
                                             </div>
                                             <div class="col">
                                                 <label for="motorcycle_count_input">عدد الدراجات المسجلة</label>
                                                 <input required id="motorcycle_count_input" name="motorcycle_count"
-                                                       type="number" class="form-control"
+                                                       type="text" class="form-control type-integer"
                                                        placeholder="عدد الدراجات المسجلة">
                                             </div>
                                         </div>
@@ -293,8 +300,8 @@
 
                                             <div class="col">
                                                 <label for="employee_count_input">عدد الموظفين العاملين</label>
-                                                <input required type="number" name="employee_count"
-                                                       id="employee_count_input" class="form-control"
+                                                <input required type="text" name="employee_count"
+                                                       id="employee_count_input" class="form-control type-integer"
                                                        placeholder="عدد الموظفين العاملين">
                                             </div>
 
