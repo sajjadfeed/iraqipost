@@ -20,4 +20,4 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 
-Route::post("/company/register",[RegisterCompany::class,"store"]);
+Route::post("/company/register",[RegisterCompany::class,"store"])->name("api.company.create");

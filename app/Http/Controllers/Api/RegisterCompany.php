@@ -116,6 +116,8 @@ class RegisterCompany extends Controller
         $company->revision_number = $request->input("revision_number");
         $company->save();
 
+
+
         return response()->json(["status"=>true,"message"=>"Form created","form_id"=>$company->id]);
 
     }

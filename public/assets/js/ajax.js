@@ -1,9 +1,9 @@
 $(document).ready(function () {
 
 
-    let api_url = "http://127.0.0.1:8000/api"
 
     let registerForm = $("#registerForm");
+    let api_url = registerForm.attr("action");
     let photoInput = $("#photo");
 
     $("#btnSave").on("click",function (){
@@ -20,7 +20,7 @@ $(document).ready(function () {
 
                 }else{
                     $.ajax({
-                        url: api_url + "/company/register",
+                        url: api_url,
                         dataType: "json",
                         type: "Post",
                         async: true,

@@ -21,7 +21,7 @@
     </div>
     <div class="container-fluid" style="background-color: #ffffff;">
 
-        <form method="post" enctype="multipart/form-data" id="registerForm" class="needs-validation">
+        <form method="post" action="{{route("api.company.create")}}" enctype="multipart/form-data" id="registerForm" class="needs-validation">
 
             <!-- Form type-->
             <div class="row p-3">
