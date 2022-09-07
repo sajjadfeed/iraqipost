@@ -17,9 +17,11 @@
 
         <div class="col">
             <label for="driver_license">اجازة السوق</label>
-            <input required type="file" name="driver_license" id="driver_license" class="form-control"
+            <input required type="file" accept="image/*" id="driver_license" class="form-control"
                    placeholder="اجازة السوق">
         </div>
+
+        <input type="hidden" name="driver_license" id="driver_license_input">
 
         <div class="col">
             <label for="email">البريد الالكتروني</label>

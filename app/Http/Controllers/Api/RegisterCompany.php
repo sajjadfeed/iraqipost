@@ -85,7 +85,6 @@ class RegisterCompany extends Controller
 
         $photoPath = "companies/".md5($request->input("company_name")) . "-".$user->id.".jpeg";
         $base64Image = explode(";base64,", $request->photo);
-        $explodeImage = explode("image/", $base64Image[0]);
         $image_base64 = base64_decode($base64Image[1]);
         $store = Storage::put($photoPath, $image_base64);
 
@@ -122,6 +121,14 @@ class RegisterCompany extends Controller
 
         //driver fields
         $company->revision_number = $request->input("revision_number");
+        if ($request->formType ==5){
+            $driver_license_path = "drivers/".md5($request->company_name)."-".$user->id.".jpeg";
+
+            $base64driverLicense = explode(";base64,", $request->driver_license);
+            $base64driverLicense = base64_decode($base64driverLicense[1]);
+            Storage::put($driver_license_path, $base64driverLicense);
+            $company->driver_license = $driver_license_path;
+        }
         $company->save();
 
 

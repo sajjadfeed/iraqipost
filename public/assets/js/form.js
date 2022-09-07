@@ -168,6 +168,23 @@ $(document).ready(function () {
                     $(".type-integer").inputFilter(function(value) {
                         return /^-?\d*$/.test(value); }, "يجب ادخل رقم");
 
+
+                    $("#driver_license").on("change",function (e){
+
+                        const file = e.target.files[0];
+                        const reader = new FileReader();
+                        reader.onloadend = () => {
+                            // console.log(reader.result);
+                            // Logs data:<type>;base64,wL2dvYWwgbW9yZ...
+                            $("#driver_license_input").val(reader.result);
+
+                        };
+                        reader.readAsDataURL(file);
+                        // console.log(reader.result);
+
+
+                    });
+
                 });
                 registerationInfo.addClass("d-none");
                 partner_type.hide();

@@ -21,7 +21,7 @@ $(document).ready(function () {
                 }else{
                     $.ajax({
                         url: api_url,
-                        dataType: "json",
+                        enctype: "multipart/form-data",
                         type: "Post",
                         async: true,
                         data: registerForm.serialize(),
