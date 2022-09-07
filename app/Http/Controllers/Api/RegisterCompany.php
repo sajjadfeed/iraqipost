@@ -10,6 +10,7 @@ use App\Http\Controllers\Controller;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Str;
 
@@ -20,7 +21,7 @@ class RegisterCompany extends Controller
 
     public function store(Request $request){
 
-        //Default validation
+//        Default validation
         $defaultValidation = $this->defaultValidation($request->all());
         if ($defaultValidation->fails()){
             return response()->json(["status"=>false,"message"=>$defaultValidation->errors()]);
@@ -32,7 +33,7 @@ class RegisterCompany extends Controller
                 return response()->json(["status"=>false,"message"=>$companyRegistrationValidation->errors()]);
             }
         }
-//
+////
 
 
 
@@ -82,6 +83,13 @@ class RegisterCompany extends Controller
 
 
 
+        $photoPath = "companies/".md5($request->input("company_name")) . "-".$user->id.".jpeg";
+        $base64Image = explode(";base64,", $request->photo);
+        $explodeImage = explode("image/", $base64Image[0]);
+        $image_base64 = base64_decode($base64Image[1]);
+        $store = Storage::put($photoPath, $image_base64);
+
+
 
         $company = new Company();
         $company->user_id = $user->id;
@@ -92,7 +100,7 @@ class RegisterCompany extends Controller
         $company->website_url = $request->input("website_url");
         $company->address_id = $address->id;
         $company->legal_registration_id = (isset($regInfo)? $regInfo->id: null);
-        $company->photo = $request->input("photo");
+        $company->photo = $photoPath;
         $company->partner_type_id = $request->input("partnet_type");
         $company->passport_number = $request->input("passport_number");
         $company->property_id = (isset($property) ?$property->id: null);
@@ -157,6 +165,27 @@ class RegisterCompany extends Controller
         return $validator;
 
 
+
+    }
+
+
+
+    public function upload(Request $request){
+
+
+        if ($request->hasFile("image")){
+
+            $imageName = time().'.'.$request->file("image")->getClientOriginalExtension();
+            $filePath = "public/". $imageName;
+//
+            $store = Storage::put($filePath, file_get_contents($request->file("image")));
+
+
+
+//            return Storage::disk('s3')->response($filePath);
+
+
+        }
 
     }
 }
