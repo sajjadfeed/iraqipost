@@ -53,6 +53,7 @@ class RegisterCompany extends Controller
         $address->alqada = $request->input("alqada");
         $address->alziqaq = $request->input("alziqaq");
         $address->almahala = $request->input("almahala");
+        $address->near = $request->input("near");
         $address->user_id = $user->id;
         $address->save();
 
@@ -65,6 +66,7 @@ class RegisterCompany extends Controller
             $regInfo->registration_address = $request->input("registration_address");
             $regInfo->registration_date = Str::replace("/","-",$request->input("registration_date"));
             $regInfo->registration_type = $request->input("registration_type");
+            $regInfo->bcc_id_number = $request->input("bcc_id_number");
             $regInfo->user_id = $user->id;
             $regInfo->save();
         }
@@ -95,7 +97,7 @@ class RegisterCompany extends Controller
         $company->trade_name = $request->input("trade_name");
         $company->formType = $request->input("formType");
         $company->legal_form = $request->input("legal_form");
-        $company->budget = $request->input("company_budget");
+        $company->budget = Str::replace(",","",$request->input("company_budget"));
         $company->website_url = $request->input("website_url");
         $company->address_id = $address->id;
         $company->legal_registration_id = (isset($regInfo)? $regInfo->id: null);
@@ -105,6 +107,8 @@ class RegisterCompany extends Controller
         $company->property_id = (isset($property) ?$property->id: null);
         $company->ceo_name = $request->input("ceo_name");
         $company->national_id_number = $request->input("national_id_number");
+        $company->paper_number = $request->input("paper_number");
+        $company->book_number = $request->input("book_number");
 
         //page fields
         $company->id_number = $request->input("id_number");
@@ -149,7 +153,6 @@ class RegisterCompany extends Controller
             "almahala"=>["required","max:255"],
             "alziqaq"=>["required","max:255"],
             "passport_number"=>["required","max:255"],
-            "national_id_number"=>["required","max:255"],
             "photo"=>["required"],
         ]);
 

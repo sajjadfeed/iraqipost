@@ -44,6 +44,7 @@ $(document).ready(function () {
 
     let mainInfo = $("#mainInfo");
     let companyBuget = $("#companyـbudget");
+    let documentsType = $("#documentsType");
     let registerationInfo = $("#company_registeration_info");
     let companyPropertySection = $("#company_property_section");
     let ceoNameCol = $("#ceo_name_col");
@@ -52,6 +53,18 @@ $(document).ready(function () {
 
 
 
+    documentsType.on("change",function (){
+        let val = $(this).val();
+
+        if (val ==="1"){
+            $("#national_id_number_col").toggleClass("d-none");
+
+        }else if(val ==="2"){
+            $("#paper_number_col,#book_number_col,#national_id_number_col").toggleClass("d-none");
+        }else{
+            $("#national_id_number_col,#paper_number_col,#book_number_col").addClass("d-none");
+        }
+    })
 
 
     const constraints = {
@@ -78,6 +91,15 @@ $(document).ready(function () {
 
         stream = await navigator.mediaDevices.getUserMedia(constraints);
         formVideo.srcObject = stream;
+
+    });
+
+    $('#cameraModal').on('hide.bs.modal', function (event) {
+        // do something...
+        stream.getTracks().forEach(function(track) {
+            track.stop();
+        });
+
 
     });
 

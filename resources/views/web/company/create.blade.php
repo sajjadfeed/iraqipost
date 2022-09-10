@@ -156,7 +156,7 @@
                                         <div class="col">
                                             <label for="registration_number_input">رقم التسجيل لدى غرفة التجارة</label>
                                             <input required type="text" name="registration_number"
-                                                   id="registration_number_input" class="form-control type-integer"
+                                                   id="registration_number_input" class="form-control"
                                                    placeholder="رقم التسجيل">
                                         </div>
                                         <div class="col">
@@ -179,6 +179,16 @@
                                             <input required type="text" name="registration_type"
                                                    id="registration_type_input" class="form-control"
                                                    placeholder="نوع التسجيل">
+                                        </div>
+                                    </div>
+
+
+                                    <div class="form-row">
+                                        <div class="col">
+                                            <label for="bcc_id_number">رقم هوية غرفة تجارة</label>
+                                            <input  type="text" name="bcc_id_number"
+                                                   id="bcc_id_number" class="form-control type-integer"
+                                                   placeholder="رقم هوية غرفة تجارة">
                                         </div>
                                     </div>
 
@@ -251,12 +261,39 @@
                                                    class="form-control"
                                                    placeholder="اسم المدير المفوض او الشريك">
                                         </div>
+
                                         <div class="col">
+                                            <label for="documentsType">نوع المستمسكات</label>
+                                            <select class="form-control" required id="documentsType">
+                                                <option selected value="">اختر نوع المستمسكات</option>
+                                                <option value="1">بطاقة وطنية</option>
+                                                <option value="2">هوية احوال مدنية</option>
+                                            </select>
+                                        </div>
+
+
+                                    </div>
+
+                                    <div class="form-row">
+                                        <div class="col d-none" id="national_id_number_col">
                                             <label for="national_id_number_input">رقم البطاقة الوطنية</label>
                                             <input required id="national_id_number_input" name="national_id_number"
                                                    type="text" class="form-control type-integer"
                                                    placeholder="رقم البطاقة الوطنية">
                                         </div>
+                                        <div class="col d-none" id="paper_number_col">
+                                            <label for="national_id_number_input">رقم الصحيفة</label>
+                                            <input required id="national_id_number_input" name="paper_number"
+                                                   type="text" class="form-control"
+                                                   placeholder="رقم الصحيفة">
+                                        </div>
+                                        <div class="col d-none" id="book_number_col">
+                                            <label for="national_id_number_input">رقم السجل</label>
+                                            <input required id="national_id_number_input" name="book_number"
+                                                   type="text" class="form-control"
+                                                   placeholder="رقم السجل ">
+                                        </div>
+
                                     </div>
                                     <div class="form-row">
 
