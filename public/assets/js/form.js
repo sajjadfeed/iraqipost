@@ -58,9 +58,12 @@ $(document).ready(function () {
 
         if (val ==="1"){
             $("#national_id_number_col").toggleClass("d-none");
+            $("#paper_number_col,#book_number_col").addClass("d-none");
+
 
         }else if(val ==="2"){
-            $("#paper_number_col,#book_number_col,#national_id_number_col").toggleClass("d-none");
+            $("#national_id_number_col").addClass("d-none");
+            $("#paper_number_col,#book_number_col").toggleClass("d-none");
         }else{
             $("#national_id_number_col,#paper_number_col,#book_number_col").addClass("d-none");
         }
